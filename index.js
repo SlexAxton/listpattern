@@ -26,10 +26,13 @@ function extractListPatterns(data) {
 }
 
 /**
- * @param {object} cldrData Ideally you just take the cldr-js value for your locale and pass it straight in
- * @param {object} [_defaultConfig] Set a default configuration override for every invocation of the resulting formatter
+ * @param {object} cldrData Ideally you just take the cldr-js value for your
+ * locale and pass it straight in
+ * @param {object} [_defaultConfig] Set a default configuration override for
+ * every invocation of the resulting formatter
  *
- * @returns {function} This returns a formatter function that obeys the locale and default configuration rules
+ * @returns {function} This returns a formatter function that obeys the locale
+ * and default configuration rules
  */
 function ListPattern(cldrData, _defaultConfig) {
   var formatter = function listPatternFormatter(list) {
