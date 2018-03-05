@@ -4,7 +4,8 @@
   "description": "CLDR ListPattern Formatter Library",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "prettier --write **/*.js"
   },
   "repository": {
     "type": "git",
