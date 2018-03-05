@@ -5,6 +5,7 @@ describe('Setup', function() {
   test('Configuration object is stored', function() {
     var formatter = ListPattern(MockConfig.test);
     expect(formatter).toHaveProperty('__cldr__');
+    expect(formatter).toHaveProperty('__config__');
   });
 
   test('CLDR config is stored without CLDR fanfare', function() {
@@ -21,5 +22,19 @@ describe('Setup', function() {
     expect(formatterWithoutFanfare.__cldr__).toHaveProperty(
       'listPattern-type-standard'
     );
+  });
+
+  test('Default config is stored', function() {
+    var formatter = ListPattern(MockConfig.test);
+    expect(formatter.__config__).toHaveProperty('patternType');
+    expect(formatter.__config__.patternType).toBe('standard');
+  });
+
+  test('Default config overrides are stored', function() {
+    var formatter = ListPattern(MockConfig.test, {
+      patternType: 'or'
+    });
+    expect(formatter.__config__).toHaveProperty('patternType');
+    expect(formatter.__config__.patternType).toBe('or');
   });
 });

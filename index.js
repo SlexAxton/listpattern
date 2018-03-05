@@ -1,10 +1,11 @@
-var DEFAULT_LIST_PATTERN = 'listPattern-type-standard';
+var DEFAULT_LIST_PATTERN = 'standard';
+var LIST_PATTERN_PREFIX = 'listPattern-type-';
 
 // Internal function that extracts the important bits of the CLDR data
 // and throws away the cruft.
 function extractListPatterns(data) {
   // Break early if we have a reduced config object
-  if (typeof data[DEFAULT_LIST_PATTERN] == 'object') {
+  if (typeof data[LIST_PATTERN_PREFIX + DEFAULT_LIST_PATTERN] == 'object') {
     return data;
   }
 
@@ -15,7 +16,9 @@ function extractListPatterns(data) {
         if (
           data.main[key] &&
           data.main[key].listPatterns &&
-          data.main[key].listPatterns[DEFAULT_LIST_PATTERN]
+          data.main[key].listPatterns[
+            LIST_PATTERN_PREFIX + DEFAULT_LIST_PATTERN
+          ]
         ) {
           return data.main[key].listPatterns;
         }
@@ -40,6 +43,12 @@ function ListPattern(cldrData, _defaultConfig) {
   };
 
   formatter.__cldr__ = extractListPatterns(cldrData);
+  formatter.__config__ = Object.assign(
+    {
+      patternType: DEFAULT_LIST_PATTERN
+    },
+    _defaultConfig || {}
+  );
 
   return formatter;
 }
