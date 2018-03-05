@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/SlexAxton/listpattern/issues"
   },
-  "homepage": "https://github.com/SlexAxton/listpattern#readme"
+  "homepage": "https://github.com/SlexAxton/listpattern#readme",
+  "devDependencies": {
+    "prettier": "1.11.1"
+  }
 }
