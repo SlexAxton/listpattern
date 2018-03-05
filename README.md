@@ -2,6 +2,14 @@
 
 This is a single-utility formatter for CLDR listPatterns.
 
+```
+npm install --save cldr-listpattern
+```
+
+```
+yarn add cldr-listpattern
+```
+
 ## What does it do though?
 
 Formatting a variable list of words into a sentence is simple for a single language. For instance
@@ -26,7 +34,7 @@ generically in the locale of your choosing.
 ## TLDR: Give it the CLDR data, generate a formatter, optionally send config
 
 ```js
-const ListPattern = require('listpattern');
+const ListPattern = require('cldr-listpattern');
 
 // You can use cldr.js to do this for real
 const enUsListPatternCLDRData = {…};
@@ -118,7 +126,7 @@ you generate an instance with CLDR data. It is recommended that you 'memoize' or
 locale that you need to support.
 
 ```js
-const ListPattern = require('listpattern');
+const ListPattern = require('cldr-listpattern');
 const enUsListPatternFormatter = new ListPattern(enCldrData);
 ```
 
@@ -126,7 +134,7 @@ A common shortening of this technique is to just invoke the constructor directly
 statement.
 
 ```js
-const enUsListPatternFormatter = require('listpattern')(enCldrData);
+const enUsListPatternFormatter = require('cldr-listpattern')(enCldrData);
 ```
 
 ### Default configuration
@@ -137,7 +145,7 @@ similar), then you can optionally pass the config as the second argument during 
 of the formatter.
 
 ```js
-const enUsListPatternFormatter = require('listpattern')(enCldrData, {patternType: 'or'});
+const enUsListPatternFormatter = require('cldr-listpattern')(enCldrData, {patternType: 'or'});
 ```
 
 This means that anything you format with `enUsListPattern` going forward will default to the `or`
