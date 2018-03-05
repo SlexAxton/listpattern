@@ -119,7 +119,11 @@ You can either send in that entire object (easier for people using a CLDR tool),
 object, where the root level keys are each `listPattern-type-<foo>` names (easier for everyone else). We detect
 this based on the existence of the `main.<lang>.identity` sub-object.
 
-## `ListPattern(<object>locale_data[, <object>default_config>)`
+## Constructor
+
+```
+ListPattern(<object>locale_data[, <object>default_config])
+```
 
 Requiring the `listpattern` module returns a `ListPattern` constructor. It can't do anything until
 you generate an instance with CLDR data. It is recommended that you 'memoize' or cache these for each
@@ -151,7 +155,11 @@ const enUsListPatternFormatter = require('cldr-listpattern')(enCldrData, {patter
 This means that anything you format with `enUsListPattern` going forward will default to the `or`
 pattern type, instead of `standard`.
 
-## Configuration - `formatter(<array>list_data[, <object>config])`
+## Configuration
+
+```
+formatter(<array>list_data[, <object>config])
+```
 
 ### patternType
 
