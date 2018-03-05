@@ -1,0 +1,25 @@
+{
+  "name": "listpattern",
+  "version": "1.0.0",
+  "description": "CLDR ListPattern Formatter Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SlexAxton/listpattern.git"
+  },
+  "keywords": [
+    "CLDR",
+    "ListPattern",
+    "i18n",
+    "l10n"
+  ],
+  "author": "\"Alex Sexton\"",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SlexAxton/listpattern/issues"
+  },
+  "homepage": "https://github.com/SlexAxton/listpattern#readme"
+}
