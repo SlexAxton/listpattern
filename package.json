@@ -1,6 +1,6 @@
 {
   "name": "cldr-listpattern",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "CLDR ListPattern Formatter Library",
   "main": "index.js",
   "scripts": {
