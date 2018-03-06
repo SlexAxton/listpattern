@@ -59,44 +59,244 @@ describe('Setup', function() {
 });
 
 describe('Formatting', function() {
-  test('Formats a a list of 0 items', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter([])).toBe('');
+  describe('No config', function() {
+    var formatter;
+
+    beforeEach(function() {
+      formatter = ListPattern(MockConfig.test);
+    });
+
+    test('Formats a a list of 0 items', function() {
+      expect(formatter([])).toBe('');
+    });
+
+    test('Formats a a list of 1 item', function() {
+      expect(formatter(MockData.animals1)).toBe('lions');
+    });
+
+    test('Formats a list of exactly 2', function() {
+      expect(formatter(MockData.animals2)).toBe('lions and tigers');
+    });
+
+    test('Formats a list of 3', function() {
+      expect(formatter(MockData.animals3)).toBe('lions, tigers, and bears');
+    });
+
+    test('Formats a list of 4', function() {
+      expect(formatter(MockData.animals4)).toBe(
+        'lions, tigers, bears, and sharks'
+      );
+    });
+
+    test('Formats a list of 5', function() {
+      expect(formatter(MockData.animals5)).toBe(
+        'lions, tigers, bears, sharks, and llamas'
+      );
+    });
+
+    test('Formats a list of 10', function() {
+      expect(formatter(MockData.animals10)).toBe(
+        'lions, tigers, bears, sharks, llamas, zebras, chimps, hedgehogs, owls, and wolves'
+      );
+    });
   });
 
-  test('Formats a a list of 1 item', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals1)).toBe('lions');
+  describe('With default config', function() {
+    var formatter;
+
+    beforeEach(function() {
+      formatter = ListPattern(MockConfig.test, {
+        patternType: 'or'
+      });
+    });
+
+    test('Formats a a list of 0 items', function() {
+      expect(formatter([])).toBe('');
+    });
+
+    test('Formats a a list of 1 item', function() {
+      expect(formatter(MockData.animals1)).toBe('lions');
+    });
+
+    test('Formats a list of exactly 2', function() {
+      expect(formatter(MockData.animals2)).toBe('lions or tigers');
+    });
+
+    test('Formats a list of 3', function() {
+      expect(formatter(MockData.animals3)).toBe('lions, tigers, or bears');
+    });
+
+    test('Formats a list of 4', function() {
+      expect(formatter(MockData.animals4)).toBe(
+        'lions, tigers, bears, or sharks'
+      );
+    });
+
+    test('Formats a list of 5', function() {
+      expect(formatter(MockData.animals5)).toBe(
+        'lions, tigers, bears, sharks, or llamas'
+      );
+    });
+
+    test('Formats a list of 10', function() {
+      expect(formatter(MockData.animals10)).toBe(
+        'lions, tigers, bears, sharks, llamas, zebras, chimps, hedgehogs, owls, or wolves'
+      );
+    });
   });
 
-  test('Formats a list of exactly 2', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals2)).toBe('lions and tigers');
+  describe('With default config - uncommon pattern type', function() {
+    var formatter;
+
+    beforeEach(function() {
+      formatter = ListPattern(MockConfig.test, {
+        patternType: 'unit-narrow'
+      });
+    });
+
+    test('Formats a a list of 0 items', function() {
+      expect(formatter([])).toBe('');
+    });
+
+    test('Formats a a list of 1 item', function() {
+      expect(formatter(MockData.animals1)).toBe('lions');
+    });
+
+    test('Formats a list of exactly 2', function() {
+      expect(formatter(MockData.animals2)).toBe('lions tigers');
+    });
+
+    test('Formats a list of 3', function() {
+      expect(formatter(MockData.animals3)).toBe('lions tigers bears');
+    });
+
+    test('Formats a list of 4', function() {
+      expect(formatter(MockData.animals4)).toBe('lions tigers bears sharks');
+    });
+
+    test('Formats a list of 5', function() {
+      expect(formatter(MockData.animals5)).toBe(
+        'lions tigers bears sharks llamas'
+      );
+    });
+
+    test('Formats a list of 10', function() {
+      expect(formatter(MockData.animals10)).toBe(
+        'lions tigers bears sharks llamas zebras chimps hedgehogs owls wolves'
+      );
+    });
   });
 
-  test('Formats a list of 3', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals3)).toBe('lions, tigers, and bears');
+  describe('With default config - non-latin characters', function() {
+    var formatter;
+
+    beforeEach(function() {
+      formatter = ListPattern(MockConfig.test, {
+        patternType: 'chinese'
+      });
+    });
+
+    test('Formats a a list of 0 items', function() {
+      expect(formatter([])).toBe('');
+    });
+
+    test('Formats a a list of 1 item', function() {
+      expect(formatter(MockData.animals1)).toBe('lions');
+    });
+
+    test('Formats a list of exactly 2', function() {
+      expect(formatter(MockData.animals2)).toBe('lions和tigers');
+    });
+
+    test('Formats a list of 3', function() {
+      expect(formatter(MockData.animals3)).toBe('lions、tigers和bears');
+    });
+
+    test('Formats a list of 4', function() {
+      expect(formatter(MockData.animals4)).toBe('lions、tigers、bears和sharks');
+    });
+
+    test('Formats a list of 5', function() {
+      expect(formatter(MockData.animals5)).toBe(
+        'lions、tigers、bears、sharks和llamas'
+      );
+    });
+
+    test('Formats a list of 10', function() {
+      expect(formatter(MockData.animals10)).toBe(
+        'lions、tigers、bears、sharks、llamas、zebras、chimps、hedgehogs、owls和wolves'
+      );
+    });
   });
 
-  test('Formats a list of 4', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals4)).toBe(
-      'lions, tigers, bears, and sharks'
-    );
-  });
+  describe('With invidual config and invalid default', function() {
+    var formatter;
 
-  test('Formats a list of 5', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals5)).toBe(
-      'lions, tigers, bears, sharks, and llamas'
-    );
-  });
+    beforeEach(function() {
+      formatter = ListPattern(MockConfig.test, {
+        patternType: 'doesnt-exist'
+      });
+    });
 
-  test('Formats a list of 10', function() {
-    var formatter = ListPattern(MockConfig.test);
-    expect(formatter(MockData.animals10)).toBe(
-      'lions, tigers, bears, sharks, llamas, zebras, chimps, hedgehogs, owls, and wolves'
-    );
+    test('Formats a a list of 0 items', function() {
+      expect(formatter([])).toBe('');
+    });
+
+    test('Formats a a list of 1 item', function() {
+      expect(formatter(MockData.animals1)).toBe('lions');
+    });
+
+    test('Formats a list of exactly 2', function() {
+      expect(formatter(MockData.animals2)).toBe('lions and tigers');
+      expect(
+        formatter(MockData.animals2, {
+          patternType: 'or'
+        })
+      ).toBe('lions or tigers');
+    });
+
+    test('Formats a list of 3', function() {
+      expect(formatter(MockData.animals3)).toBe('lions, tigers, and bears');
+      expect(
+        formatter(MockData.animals3, {
+          patternType: 'or'
+        })
+      ).toBe('lions, tigers, or bears');
+    });
+
+    test('Formats a list of 4', function() {
+      expect(formatter(MockData.animals4)).toBe(
+        'lions, tigers, bears, and sharks'
+      );
+      expect(
+        formatter(MockData.animals4, {
+          patternType: 'or'
+        })
+      ).toBe('lions, tigers, bears, or sharks');
+    });
+
+    test('Formats a list of 5', function() {
+      expect(formatter(MockData.animals5)).toBe(
+        'lions, tigers, bears, sharks, and llamas'
+      );
+      expect(
+        formatter(MockData.animals5, {
+          patternType: 'or'
+        })
+      ).toBe('lions, tigers, bears, sharks, or llamas');
+    });
+
+    test('Formats a list of 10', function() {
+      expect(formatter(MockData.animals10)).toBe(
+        'lions, tigers, bears, sharks, llamas, zebras, chimps, hedgehogs, owls, and wolves'
+      );
+      expect(
+        formatter(MockData.animals10, {
+          patternType: 'or'
+        })
+      ).toBe(
+        'lions, tigers, bears, sharks, llamas, zebras, chimps, hedgehogs, owls, or wolves'
+      );
+    });
   });
 });

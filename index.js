@@ -41,8 +41,17 @@ function formatLiteralPattern(list, listPattern) {
   return result;
 }
 
-function listPatternFormatter(list) {
+function listPatternFormatter(list, _config) {
+  // Use the default config patternType by default…
+  var patternTypeResolution = this.__config__.patternType;
+
+  // If we're overriding the pattern type just for this format call, do it
+  if (_config && _config.patternType) {
+    patternTypeResolution = _config.patternType;
+  }
+
   var listPatternRules =
+    this.__cldr__[LIST_PATTERN_PREFIX + patternTypeResolution] ||
     this.__cldr__[LIST_PATTERN_PREFIX + this.__config__.patternType] ||
     this.__cldr__[LIST_PATTERN_PREFIX + DEFAULT_LIST_PATTERN];
 
