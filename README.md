@@ -31,6 +31,8 @@ vs
 This tool uses available localization data from the CLDR to allow you to make these types of lists
 generically in the locale of your choosing.
 
+_Update: listpattern's general functionality is standardized as part of the [`Intl.ListFormat` API](https://developers.google.com/web/updates/2018/12/intl-listformat)._
+
 ## TLDR: Give it the CLDR data, generate a formatter, optionally send config
 
 ```js
